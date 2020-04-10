@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  nodeapp:
+    image: lb_nodeapp
+    expose:
+      - '5000'
+    deploy:
+      replicas: 15
+      restart_policy:
+        max_attempts: 3
+        condition: on-failure       
+      update_config:
+        parallelism: 3
+        delay: 10s
+    networks: 
+      - balance 
+  proxy:
+    image: lb_proxy
+    ports:
+      - 8089:80 #내컴8089 인도커 80
+    depends_on:
+      - nodeapp
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks: 
+      - balance
+
+networks:
+  balance:
+    driver: overlaynce
+
+networks:
+  balance:
+    driver: overlay

@@ -14,12 +14,11 @@ io.on('connection', function (socket) {
     console.log("conneted");
 
     socket.on('join', function (data) {
-        socket.join('room' + data);
+        socket.join('room' + data.roomId);
     });
 
     socket.on('message', function (data) {
-        //socket.in().emit(data.text);
-        //console.log('MessageArrive', data);
+        socket.in('room'+data.roomId).emit(data.text);
     });
 
     socket.on('check', function (data) {

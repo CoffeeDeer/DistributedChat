@@ -13,3 +13,8 @@ situation - web streaming service (ex. twitch)
 
 ThinkPoint 
 * chat server dynamic scaling
+
+서버에서 작동해야 하는건 뭐지? 
+음 그러니까. 
+
+사용자가 서버측에 요청하고 yo
